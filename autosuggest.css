@@ -1,0 +1,11 @@
+/*
+ * This CSS file for Auto Suggest JavaScript component
+ * this component works for GnimJS
+ * Write by Ming
+ * Date 2012.04.22
+ */
+
+.autosuggest{display:block;position:absolute;border:#000 1px solid;list-style:none;background:#fff;z-index:1;}
+.autosuggest-loading{padding:10px 20px;text-align:center;}
+.autosuggest-item{display:block;padding:3px 10px 3px 5px;color:#444;cursor:pointer;}
+.autosuggest-item-hover{background:#f29438;color:#fff;}

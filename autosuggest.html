@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Auto Suggest</title>
+        <link rel="stylesheet" href="autosuggest.css" type="text/css"/>
+        <style type="text/css">
+            * {margin:0;padding:0;}
+            body{padding:10px;}
+            h1{font-size:22px;margin:15px 0 5px;}
+            h2{font-size:20px;margin:13px 0 5px;}
+            h3{font-size:18px;margin:11px 0 5px;}
+            h4{font-size:16px;margin:9px 0 5px;}
+            h5{font-size:14px;margin:7px 0 5px;}
+            h6{font-size:12px;margin:5px 0 5px;}
+            p,.line{display:block;padding:5px;}
+            p{line-height:150%;}
+            button{padding:3px;margin:5px;}
+            
+            #acdemo{left:5px;top:65px;}
+        </style>
+    </head>
+    <body>
+        <div id="csstest">
+            <h3>CSS测试</h3>
+            <input class="input" />
+        </div>
+        <div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+        <div id="demo">
+            <h3>组件演示</h3>
+            <p><label>文本框：</label><input /></p>
+        </div>
+        <div id="demo2">
+            <h3>组件演示2</h3>
+            <p><label>文本框：</label><input /></p>
+        </div>
+        <script src="https://raw.github.com/GnimNet/GnimJS/master/full/gnim.js"></script>
+        <script src="autosuggest-min.js"></script>
+        <script>
+            var LOAD_TIP='\u6b63\u5728\u64cd\u4f5c...';
+            var LOAD_DOM='\u6b63\u5728\u52a0\u8f7d...';
+            var LOAD_BLOCK='<div class="container-loading">'+LOAD_DOM+'</div>';
+            function funcGet(input){
+                var values=input.value.split(';');
+                return values[values.length-1];
+            }
+            function funcSet(input,value){
+                var values=input.value.split(';');
+                values[values.length-1]=value;
+                input.value=values.join(';')+';';
+            }
+            function funcVal($dom){
+                var $b=$dom.find('b');
+                return $b.length>0?$b.text():$dom.text();
+            }
+            var data=['Mike','Lucy','Ming<b>(Admin)</b>','Lily','Tom','明','明明'];
+            var ac=new AutoSuggest('#demo input',function(str,suggest){
+                if(str.length>=3){
+                    setTimeout(function(){
+                        suggest.dom(data);
+                    }, 1000);
+                    return true;
+                }else{
+                    suggest.dom(null);
+                    return false;
+                }
+            },LOAD_BLOCK,funcGet,funcSet,funcVal
+        );
+            var ac2=new AutoSuggest('#demo2 input',['Google','Baidu','Sina','Tencent','Sogou','Yahoo',
+                /*
+    'Google','Baidu','Sina','Tencent','Sogou','Yahoo',
+    'Google','Baidu','Sina','Tencent','Sogou','Yahoo',
+    'Google','Baidu','Sina','Tencent','Sogou','Yahoo',
+    'Google','Baidu','Sina','Tencent','Sogou','Yahoo',
+    'Google','Baidu','Sina','Tencent','Sogou','Yahoo',
+    'Google','Baidu','Sina','Tencent','Sogou','Yahoo',
+    'Google','Baidu','Sina','Tencent','Sogou','Yahoo',
+    'Google','Baidu','Sina','Tencent','Sogou','Yahoo',
+                 */
+                'Facebook']);
+
+        </script>
+        <ul id="acdemo" class="autosuggest">
+            <li class="autosuggest-item">选项1</li>
+            <li class="autosuggest-item autosuggest-item-hover">选项2</li>
+            <li class="autosuggest-item">选项3，很长很长很长很长很长很长很长很长</li>
+            <li class="autosuggest-item">选项4</li>
+        </ul>
+    </body>
+</html>
